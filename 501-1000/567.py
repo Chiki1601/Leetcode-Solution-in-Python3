@@ -1,13 +1,17 @@
-def checkInclusion(self, s1: str, s2: str) -> bool:
-	cntr, w = Counter(s1), len(s1)   
+class Solution:
+    def checkInclusion(self, s1: str, s2: str) -> bool:
+        cnt = [0] * 26
+        for x in s1:
+            cnt[ord(x) - ord('a')] += 1
 
-	for i in range(len(s2)):
-		if s2[i] in cntr: 
-			cntr[s2[i]] -= 1
-		if i >= w and s2[i-w] in cntr: 
-			cntr[s2[i-w]] += 1
+        n1 = len(s1)
+        n2 = len(s2)
 
-		if all([cntr[i] == 0 for i in cntr]): # see optimized code below
-			return True
+        for i in range(n2 - n1 + 1):
+            cnt2 = [0] * 26
+            for j in range(i, i + n1):
+                cnt2[ord(s2[j]) - ord('a')] += 1
+            if cnt == cnt2:
+                return True
 
-	return False
+        return False
